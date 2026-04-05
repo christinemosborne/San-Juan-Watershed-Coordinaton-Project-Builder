@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lower San Juan Project Coordination Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="sj-header">
+    <div class="sj-header-inner">
+      <div>
+        <h1>Lower San Juan Watershed Project Coordination</h1>
+        <p class="sj-subtitle">
+          Practical tools to coordinate water, infrastructure, and community development projects
+          in the Utah reach of the San Juan River Watershed.
+        </p>
+      </div>
+      <nav class="sj-nav">
+        <a href="#project-builder">Project Builder</a>
+        <a href="#project-registry">Project Registry</a>
+        <a href="#stakeholders">Stakeholders</a>
+        <a href="#process-guidance">Process Guidance</a>
+        <a href="#stories">Project Stories</a>
+        <a href="#governance">Governance</a>
+        <a href="#updates">Updates</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Intro / Purpose & Scope -->
+    <section class="sj-section sj-hero" id="purpose">
+      <div class="sj-section-inner">
+        <h2>Purpose and Scope</h2>
+        <p>
+          This portal is a practical guide for anyone working on water, infrastructure, or community
+          development projects in the Utah reach of the San Juan River Watershed, including
+          Bluff, Blanding, Monticello, La Sal, White Mesa, and the seven Utah Navajo Nation Chapters
+          (Aneth, Mexican Water, Navajo Mountain, Oljato, Red Mesa, Teec Nos Pos, and Sweetwater). 
+        </p>
+        <p>
+          It is designed to support Tribal and Chapter sovereignty by clarifying external
+          government processes so that Tribal and Chapter priorities lead, and state, federal,
+          and nonprofit partners are engaged at the right time and in the right way.
+        </p>
+        <ul class="sj-key-questions">
+          <li>Who needs to be engaged for my project, and in what order?</li>
+          <li>Who else is working on related projects, and how do we coordinate?</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 1. PROJECT BUILDER (keeps your existing layout idea, but wired to portal content) -->
+    <section class="sj-section" id="project-builder">
+      <div class="sj-section-inner">
+        <h2>Project Builder</h2>
+        <p>
+          Use this project builder to sketch your idea, locate it in the watershed, and see
+          which entities and approvals are likely involved. This section mirrors the structure
+          of your current San Juan Project Builder while tying directly into the coordination
+          playbook.
+        </p>
+
+        <form class="sj-form" id="project-builder-form">
+          <div class="sj-form-row">
+            <label for="pb-title">Project title</label>
+            <input id="pb-title" name="pb-title" type="text" placeholder="Short, plain-language title" />
+          </div>
+
+          <div class="sj-form-row sj-form-row-grid">
+            <div>
+              <label for="pb-location">Location (Chapter / community)</label>
+              <input id="pb-location" name="pb-location" type="text" placeholder="e.g., Aneth Chapter" />
+            </div>
+            <div>
+              <label for="pb-project-type">Project type</label>
+              <select id="pb-project-type" name="pb-project-type">
+                <option value="">Select a type</option>
+                <option value="irrigation">Irrigation</option>
+                <option value="culinary-water">Culinary water</option>
+                <option value="transportation-flood">Transportation / flood recovery</option>
+                <option value="water-quality">Water quality</option>
+                <option value="community-dev">Community development</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="sj-form-row">
+            <label for="pb-description">Brief description</label>
+            <textarea id="pb-description" name="pb-description" rows="4"
+              placeholder="What the project does, why it matters, and who it serves."></textarea>
+          </div>
+
+          <div class="sj-form-row sj-form-row-grid">
+            <div>
+              <label for="pb-status">Current status</label>
+              <select id="pb-status" name="pb-status">
+                <option value="">Select</option>
+                <option value="concept">Concept</option>
+                <option value="scoping">Scoping / feasibility</option>
+                <option value="design">Design / permitting</option>
+                <option value="funding">Funding application</option>
+                <option value="implementation">Implementation</option>
+                <option value="completed">Completed</option>
+              </select>
+            </div>
+            <div>
+              <label for="pb-funding-stage">Funding stage</label>
+              <select id="pb-funding-stage" name="pb-funding-stage">
+                <option value="">Select</option>
+                <option value="unfunded">Unfunded</option>
+                <option value="partially-funded">Partially funded</option>
+                <option value="fully-funded">Fully funded</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="sj-form-row">
+            <label for="pb-lead">Lead entity / primary contact</label>
+            <input id="pb-lead" name="pb-lead" type="text"
+              placeholder="Chapter, Tribal program, or other lead organization" />
+          </div>
+
+          <div class="sj-form-row">
+            <label for="pb-partners">Key partners (optional)</label>
+            <textarea id="pb-partners" name="pb-partners" rows="2"
+              placeholder="List known partners (Tribal, local, state, federal, nonprofit)."></textarea>
+          </div>
+
+          <div class="sj-form-row">
+            <button type="button" id="pb-generate-path">
+              Suggest coordination pathway
+            </button>
+          </div>
+
+          <div class="sj-form-row">
+            <label>Suggested coordination sequence (draft)</label>
+            <div id="pb-path-output" class="sj-path-output">
+              Fill in project type and location, then click “Suggest coordination pathway.”
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- 2. PROJECT REGISTRY + INTERACTIVE MAP PLACEHOLDER -->
+    <section class="sj-section" id="project-registry">
+      <div class="sj-section-inner">
+        <h2>Project Registry</h2>
+        <p>
+          This registry lists current and proposed projects in the Lower San Juan watershed,
+          with status, leads, and funding stage. It is intended as the single, shared view of
+          projects for all partners.[file:1]
+        </p>
+
+        <div class="sj-filters">
+          <div>
+            <label for="filter-geography">Filter by geography</label>
+            <select id="filter-geography">
+              <option value="">All</option>
+              <option value="Aneth">Aneth</option>
+              <option value="Mexican Water">Mexican Water</option>
+              <option value="Navajo Mountain">Navajo Mountain</option>
+              <option value="Oljato">Oljato</option>
+              <option value="Red Mesa">Red Mesa</option>
+              <option value="Teec Nos Pos">Teec Nos Pos</option>
+              <option value="Sweetwater">Sweetwater</option>
+              <option value="Bluff">Bluff</option>
+              <option value="Blanding">Blanding</option>
+              <option value="Monticello">Monticello</option>
+              <option value="La Sal">La Sal</option>
+              <option value="White Mesa">White Mesa</option>
+            </select>
+          </div>
+          <div>
+            <label for="filter-type">Filter by project type</label>
+            <select id="filter-type">
+              <option value="">All</option>
+              <option value="irrigation">Irrigation</option>
+              <option value="culinary-water">Culinary water</option>
+              <option value="transportation-flood">Transportation / flood</option>
+              <option value="water-quality">Water quality</option>
+              <option value="community-dev">Community development</option>
+            </select>
+          </div>
+          <div>
+            <label for="filter-funding">Filter by funding stage</label>
+            <select id="filter-funding">
+              <option value="">All</option>
+              <option value="unfunded">Unfunded</option>
+              <option value="partially-funded">Partially funded</option>
+              <option value="fully-funded">Fully funded</option>
+            </select>
+          </div>
+        </div>
+
+        <table class="sj-table" id="project-table">
+          <thead>
+            <tr>
+              <th>Project</th>
+              <th>Location</th>
+              <th>Type</th>
+              <th>Status</th>
+              <th>Funding stage</th>
+              <th>Lead</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Filled by projects.js -->
+          </tbody>
+        </table>
+
+        <div class="sj-map-placeholder">
+          <h3>Interactive map (prototype)</h3>
+          <p>
+            This is a placeholder for a future interactive map showing projects by Chapter,
+            municipality, project type, and funding stage.[file:1]
+          </p>
+          <p>
+            You can embed a web map (e.g., ArcGIS Online, Mapbox, Leaflet) here later and
+            connect it to the same project registry.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. STAKEHOLDER DIRECTORY -->
+    <section class="sj-section" id="stakeholders">
+      <div class="sj-section-inner">
+        <h2>Stakeholder Directory</h2>
+        <p>
+          This directory lists entities with roles in Lower San Juan projects, organized by
+          category. It should be updated at least annually and validated by Chapters and
+          Tribal leadership.[file:1]
+        </p>
+
+        <div class="sj-stakeholder-grid">
+          <div>
+            <h3>Navajo Nation</h3>
+            <ul>
+              <li>All seven Utah Chapters (Aneth, Mexican Water, Navajo Mountain, Oljato, Red Mesa, Teec Nos Pos, Sweetwater)</li>
+              <li>Navajo Utah Commission</li>
+              <li>Resource and Development Committee</li>
+              <li>Water Resources, Agriculture, Natural Resources</li>
+              <li>Navajo Tribal Utility Authority</li>
+              <li>Wildlife Resources</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Ute Mountain Ute Tribe</h3>
+            <ul>
+              <li>Tribal Council</li>
+              <li>Natural Resources</li>
+              <li>Wildlife Resources</li>
+              <li>Cultural Resources</li>
+              <li>Legal Counsel</li>
+              <li>White Mesa community leaders</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Local governments</h3>
+            <ul>
+              <li>San Juan County (Commissioners, Economic Development)</li>
+              <li>Municipalities: Bluff, Blanding, Monticello, La Sal, White Mesa leadership</li>
+            </ul>
+          </div>
+          <div>
+            <h3>State of Utah</h3>
+            <ul>
+              <li>Division of Indian Affairs</li>
+              <li>Department of Natural Resources</li>
+              <li>Division of Water Rights</li>
+              <li>Division of Water Resources</li>
+              <li>Department of Agriculture and Food</li>
+              <li>Division of Forestry, Fire and State Lands</li>
+              <li>Division of Wildlife Resources</li>
+              <li>Department of Environmental Quality</li>
+              <li>Governor’s Office of Planning and Budget</li>
+              <li>Governor’s Office of Economic Development</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Federal agencies</h3>
+            <ul>
+              <li>Bureau of Indian Affairs</li>
+              <li>Bureau of Reclamation</li>
+              <li>Bureau of Land Management</li>
+              <li>U.S. Forest Service</li>
+              <li>Army Corps of Engineers</li>
+              <li>National Park Service</li>
+              <li>U.S. Fish and Wildlife Service</li>
+              <li>Natural Resources Conservation Service</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Nonprofits & community</h3>
+            <ul>
+              <li>Nonprofits providing technical support or funding (non‑activist)</li>
+              <li>Community members and general public</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="sj-note">
+          Note: Replace this summary with a downloadable, maintained contact list once the
+          stakeholder inventory is complete.[file:1]
+        </p>
+      </div>
+    </section>
+
+    <!-- 4. PROCESS GUIDANCE -->
+    <section class="sj-section" id="process-guidance">
+      <div class="sj-section-inner">
+        <h2>Process Guidance</h2>
+        <p>
+          The six-step coordination process provides a shared roadmap for how projects move
+          from concept to implementation across multiple governments.[file:1]
+        </p>
+
+        <ol class="sj-steps">
+          <li>
+            <strong>Step 1 – Key Stakeholder Identification.</strong>
+            Build and validate a complete list of entities and individuals relevant to projects
+            in the watershed; organize by geography and function.[file:1]
+          </li>
+          <li>
+            <strong>Step 2 – Pre-Workshop Assessment.</strong>
+            Conduct confidential interviews, document formal and informal approval steps,
+            map example projects, and identify tensions and bottlenecks.[file:1]
+          </li>
+          <li>
+            <strong>Step 3 – Convene Key Stakeholder Workshop.</strong>
+            Validate findings, co-design process maps, agree on priorities, and establish
+            the governance structure.[file:1]
+          </li>
+          <li>
+            <strong>Step 4 – Develop Workshop Report.</strong>
+            Capture processes, stakeholder map, project inventory, governance structure,
+            and priority project list in a clear, shareable report.[file:1]
+          </li>
+          <li>
+            <strong>Step 5 – Approval of Workshop Report.</strong>
+            Circulate for review, host a validation meeting, and secure formal endorsements
+            where appropriate.[file:1]
+          </li>
+          <li>
+            <strong>Step 6 – Implement, Track, and Update.</strong>
+            Launch and maintain this portal, track projects, convene regularly, and update
+            process maps and the playbook on a defined cycle.[file:1]
+          </li>
+        </ol>
+
+        <h3>Example pathway: multi‑jurisdiction irrigation project</h3>
+        <p>
+          For an irrigation project using San Juan River water across Tribal, state, and county
+          land, a recommended engagement sequence is outlined below.[file:1]
+        </p>
+        <ol class="sj-steps-small">
+          <li>Chapter Houses where the project is located – confirm community support and initiate local process.[file:1]</li>
+          <li>Navajo Nation programs – Water Resources, Agriculture, Natural Resources.[file:1]</li>
+          <li>Navajo Utah Commission – alignment with Utah‑based priorities and any R&amp;D Committee involvement.[file:1]</li>
+          <li>San Juan County – county land, permitting, and economic development.[file:1]</li>
+          <li>Utah Division of Water Rights – water rights review for Utah‑jurisdiction components.[file:1]</li>
+          <li>Bureau of Indian Affairs – trust land implications, NEPA, and funding opportunities.[file:1]</li>
+          <li>Bureau of Reclamation – applicable water delivery / infrastructure programs.[file:1]</li>
+          <li>NRCS – conservation program eligibility and technical assistance.[file:1]</li>
+          <li>Nonprofit partners – technical support and gap‑filling funding.[file:1]</li>
+        </ol>
+
+        <p class="sj-note">
+          Informal conversations and relationships with Chapter and Tribal leadership should begin
+          before and continue alongside formal engagement steps.[file:1]
+        </p>
+      </div>
+    </section>
+
+    <!-- 5. PROJECT STORIES -->
+    <section class="sj-section" id="stories">
+      <div class="sj-section-inner">
+        <h2>Project Stories</h2>
+        <p>
+          For each completed or substantially advanced project, a one‑page story captures what
+          the project does, who was involved, what coordination challenges were overcome, and
+          lessons for future work.[file:1]
+        </p>
+
+        <div class="sj-story-grid">
+          <article class="sj-story-card">
+            <h3>Example Story Template</h3>
+            <p><strong>What the project does and where it is:</strong> [1–2 sentences]</p>
+            <p><strong>Communities and partners involved:</strong> [list key entities]</p>
+            <p><strong>Coordination challenges and how they were addressed:</strong> [brief description]</p>
+            <p><strong>Lessons for future projects:</strong> [bulleted or short paragraph]</p>
+            <p class="sj-note">Replace this card with real stories as projects advance.[file:1]</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. GOVERNANCE & ROLES -->
+    <section class="sj-section" id="governance">
+      <div class="sj-section-inner">
+        <h2>Governance and Roles</h2>
+        <p>
+          A convening entity (backbone organization) and a small steering group provide ongoing
+          oversight for this coordination framework and portal.[file:1]
+        </p>
+
+        <h3>Convening entity (backbone)</h3>
+        <p>
+          The convening entity is responsible for calling and facilitating meetings, maintaining
+          the stakeholder list, project registry, and process maps, tracking action items, and
+          managing this portal.[file:1]
+        </p>
+
+        <h3>Steering group (7–9 members)</h3>
+        <p>
+          The steering group meets quarterly (or as needed) to review progress, resolve process
+          disputes, and approve updates to the playbook and this site.[file:1]
+        </p>
+
+        <table class="sj-table">
+          <thead>
+            <tr>
+              <th>Seat</th>
+              <th>Example representative</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Navajo Nation</td>
+              <td>Navajo Utah Commission Chair; R&amp;D Committee representative; rotating Chapter representative</td>
+            </tr>
+            <tr>
+              <td>Ute Mountain Ute Tribe</td>
+              <td>Tribal Council representative</td>
+            </tr>
+            <tr>
+              <td>Local government</td>
+              <td>San Juan County Commissioner</td>
+            </tr>
+            <tr>
+              <td>State of Utah</td>
+              <td>Utah Division of Indian Affairs</td>
+            </tr>
+            <tr>
+              <td>Federal government</td>
+              <td>Bureau of Indian Affairs</td>
+            </tr>
+            <tr>
+              <td>Nonprofit</td>
+              <td>Non‑activist nonprofit providing technical or funding support</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="sj-note">
+          Add a RACI (Responsible, Accountable, Consulted, Informed) table here if you want to
+          mirror the playbook’s roles by activity.[file:1]
+        </p>
+      </div>
+    </section>
+
+    <!-- 7. UPDATES, RISKS, AND MONITORING -->
+    <section class="sj-section" id="updates">
+      <div class="sj-section-inner">
+        <h2>Updates, Risks, and Monitoring</h2>
+        <p>
+          This portal is a living tool. It should be updated regularly as processes, contacts,
+          and projects change.[file:1]
+        </p>
+
+        <h3>Update log</h3>
+        <ul class="sj-updates-list">
+          <li><strong>Version 0.1 – Initial prototype.</strong> Portal structure created, aligned with the coordination playbook.[file:1]</li>
+          <!-- Add more entries as you update the site -->
+        </ul>
+
+        <h3>Shared indicators of progress</h3>
+        <ul>
+          <li>Number of projects advanced from concept to funded status per year.[file:1]</li>
+          <li>Average time from project concept to first key approval.[file:1]</li>
+          <li>Geographic and Tribal equity in project distribution.[file:1]</li>
+          <li>Participant satisfaction with the coordination process (annual survey).[file:1]</li>
+          <li>Number of project stories published.[file:1]</li>
+        </ul>
+
+        <h3>Risks and mitigation (examples)</h3>
+        <ul>
+          <li><strong>Governance and sovereignty tensions.</strong> Make Tribal and Chapter leadership roles explicit; use co‑chairs; require Tribal validation before major process changes.[file:1]</li>
+          <li><strong>Process fatigue.</strong> Focus on early visible wins (1–2 projects advanced) and keep meetings short and decision‑focused.[file:1]</li>
+          <li><strong>Outdated information.</strong> Assign a process steward and set an annual update cycle; date‑stamp all documents.[file:1]</li>
+          <li><strong>Representation gaps.</strong> Publish transparent participation criteria and use multiple engagement modes.[file:1]</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="sj-footer">
+    <div class="sj-section-inner">
+      <p>
+        This portal is based on the Lower San Juan Watershed Coordination Playbook and is
+        intended to support Tribal and Chapter‑led project coordination.[file:1]
+      </p>
+      <p class="sj-footer-meta">
+        Last updated: <!-- manually update --> April 2026 · Contact: [Backbone entity contact]
+      </p>
+    </div>
+  </footer>
+
+  <script src="projects.js"></script>
+  <script>
+    // Simple “suggested coordination pathway” logic keyed to project type
+    const pathOutput = document.getElementById('pb-path-output');
+    const typeSelect = document.getElementById('pb-project-type');
+    const locationInput = document.getElementById('pb-location');
+    document.getElementById('pb-generate-path').addEventListener('click', () => {
+      const type = typeSelect.value;
+      const location = locationInput.value.trim();
+      if (!type) {
+        pathOutput.textContent = 'Select a project type to see a suggested pathway.';
+        return;
+      }
+
+      const baseIntro = location
+        ? `For a ${type.replace('-', ' ')} project in ${location}, a draft coordination sequence might be:`
+        : `For this ${type.replace('-', ' ')} project, a draft coordination sequence might be:`;
+
+      const commonSteps = [
+        'Chapter House(s) where the project is located – confirm community support and initiate local process.',
+        'Relevant Navajo Nation programs (Water Resources, Agriculture, Natural Resources) – clarify Tribal approvals and requirements.',
+        'Navajo Utah Commission – confirm alignment with Utah-based priorities and identify any Resource and Development Committee involvement.',
+        'San Juan County – confirm county land, permitting, and economic development engagement as applicable.',
+        'State agencies (e.g., Utah Division of Water Rights and other relevant divisions) – address state-level approvals.',
+        'Federal partners (e.g., BIA, Bureau of Reclamation, NRCS) – identify NEPA steps, program eligibility, and funding opportunities.',
+        'Nonprofit partners – explore technical support and gap funding.'
+      ];
+
+      pathOutput.innerHTML = `
+        <p>${baseIntro}</p>
+        <ol>${commonSteps.map(step => `<li>${step}</li>`).join('')}</ol>
+        <p class="sj-note">
+          This is a starting point only. Confirm specifics through direct conversations
+          with Chapter, Tribal, county, state, and federal partners.
+        </p>
+      `;
+    });
+  </script>
+</body>
+</html>
